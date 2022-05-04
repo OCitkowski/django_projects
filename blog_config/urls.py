@@ -19,7 +19,7 @@ from notebook.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
-    path('note/', include('notebook.urls')),
+    # path('', index, name='index'),
+    path('', include('notebook.urls')),
 ]
 

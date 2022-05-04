@@ -1,3 +1,19 @@
-<p><a> Main </a></p>
-{% block content %}
-{% endblock content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <link rel="stylesheet" href="style.css" />
+    <title>{% block title %} My Webpage {% endblock %} </title>
+    {% endblock %}
+</head>
+<body>
+    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="footer">
+        {% block footer %}
+        &copy; Copyright 2008 by <a href="{% url 'notebook:index' %}"> Return </a>.
+        {% endblock %}
+        <a href="{% url 'daybook:index' %}"> Add new topic </a>
+    </div>
+
+</body>
+</html>

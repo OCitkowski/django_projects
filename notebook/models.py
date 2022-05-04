@@ -33,7 +33,7 @@ class CommentsNote(models.Model):
     """Comments for note"""
 
     name = models.CharField('Name comment', max_length=200)
-    image = models.ImageField('Image', upload_to=None, height_field=100, width_field=100, max_length=100, null=True)
+    image = models.ImageField('Image', upload_to=None, height_field=100, width_field=100, max_length=100, null=True, blank=True)
     comment = models.TextField('Comment', default='')
     date_create = models.DateTimeField(auto_now_add=True)
     url = models.SlugField(max_length=160, unique=True)
@@ -53,7 +53,7 @@ class Note(models.Model):
     stars = models.ForeignKey(StarsNote, on_delete=models.CASCADE)
     comment = models.ManyToManyField(CommentsNote)
     category = models.ManyToManyField(CategoryNote)
-    image = models.ImageField('Image', upload_to=None, height_field=500, width_field=500)
+    image = models.ImageField('Image', upload_to=None, height_field=500, width_field=500, blank=True)
     url = models.SlugField(max_length=160, unique=True)
 
     date_create = models.DateTimeField(auto_now_add=True)

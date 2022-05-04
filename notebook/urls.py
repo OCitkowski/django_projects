@@ -1,12 +1,12 @@
 """Defines Url pattern for notebook"""
-from django.urls import path
+from django.urls import path, include
 # from . import views
-from notebook.views import index, topics
+from notebook.views import index, notes
 
-app_name = 'note'
+app_name = 'notebook'
 urlpatterns = [
     # Mane page
-    # path('', index, name='index'),
+    path('', index, name='index'),
     #topics page
-    path('topics/', topics, name='topics page'),
+    path('notes/', notes, name='topics page'),
     ]

@@ -1,5 +1,23 @@
 {% extends "notebook/base.html" %}
+{% block title %}
+    {{ title }}
+{% endblock %}
 
-{% block content %}
-<p> "notes" </p>
+{% block content%}
+<p>My notes</p>
+
+<ul>
+    {% for note in notes %}
+    <li>{{ note }}</li>
+    {% empty %}
+    <li> No topics have been added yet</li>
+    {% endfor %}
+
+    {% for test in tests %}
+    <li> This is - {{ test }}</li>
+    {% empty %}
+    <li> No topics have been added yet</li>
+    {% endfor %}
+</ul>
+
 {% endblock content %}
