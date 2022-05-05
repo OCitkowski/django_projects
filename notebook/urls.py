@@ -8,5 +8,6 @@ urlpatterns = [
     # Mane page
     path('', index, name='index'),
     #topics page
-    path('notes/', notes, name='topics page'),
+    path('notes/', notes, name='notes'),
+
     ]

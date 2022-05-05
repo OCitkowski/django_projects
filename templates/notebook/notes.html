@@ -7,10 +7,19 @@
 <p>My notes</p>
 
 <ul>
+    {% for cat in category %}
+    <li>
+        <div><a href="{% url 'notebook:notes' %}"> {{ cat }} </a></div>
+    </li>
     {% for note in notes %}
-    <li>{{ note }}</li>
+
+    <li>
+        <div><a href="{% url 'notebook:notes' %}"> {{ note }}  {{ note.category }}</a></div>
+    </li>
+
     {% empty %}
     <li> No topics have been added yet</li>
+    {% endfor %}
     {% endfor %}
 
     {% for test in tests %}

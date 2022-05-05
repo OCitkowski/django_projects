@@ -10,10 +10,11 @@
     <div id="content">{% block content %}{% endblock %}</div>
     <div id="footer">
         {% block footer %}
-        &copy; Copyright 2008 by <a href="{% url 'notebook:index' %}"> Return </a>.
+        &copy; Copyright 2022 by <a href="{% url 'notebook:index' %}"> My page </a>.
         {% endblock %}
-        <a href="{% url 'daybook:index' %}"> Add new topic </a>
     </div>
+
+    <div> <a href="{% url 'notebook:index' %}"> Add new topic </a> </div>
 
 </body>
 </html>
