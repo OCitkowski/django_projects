@@ -1,14 +1,37 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-# from .models import Topic, Entry
+from .models import Teg, Post, Category
+from django.views.generic import ListView
 # from .forms import TopicForm, EntryForm
 
 
-def index(request):
-    ''' Mane page'''
-    # return render(request, 'daybook/index.html')
-    return HttpResponse("Hello, world. You're at the polls index.")
+class PostsListAll(ListView):
 
-def detail(request, question_id):
+    model = Post
+    template_name = 'blog/index.html'
+    context_object_name = 'posts'
+    # extra_context = {'title': 'main page'}
 
-    return HttpResponse(f'ou"re looking at question {question_id}')
+    def get_context_data(self, *, object_list=None, **kwargs):
+        contex = super().get_context_data(**kwargs)
+        contex['title'] = 'Main page'
+        return contex
+
+    def get_queryset(self):
+        return Post.objects.filter(is_published=True)
+
+
+class PostsListCategory(ListView):
+
+    model = Post
+    template_name = 'blog/index.html'
+    context_object_name = 'posts'
+    # extra_context = {'title': 'main page'}
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        contex = super().get_context_data(**kwargs)
+        contex['title'] = 'Main page'
+        return contex
+
+    def get_queryset(self):
+        return Post.objects.filter(is_published=True)

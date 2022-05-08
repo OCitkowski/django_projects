@@ -1,0 +1,26 @@
+{% extends "blog/base.html" %}
+
+{% block content%}
+
+<h2>{{ title }}</h2>
+
+<ul>
+    {% for post in posts %}
+
+    <li>{{ post.title }} {{ post.category }} </li>
+
+    {% endfor %}
+</ul>
+
+<h2>All posts</h2>
+<ul>
+    {% for post in posts %}
+    <li> {{ post }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}
+
+
+
+
