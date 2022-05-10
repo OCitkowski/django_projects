@@ -1,23 +1,86 @@
 {% extends "blog/base.html" %}
+{% load static %}
 
 {% block content%}
-
-<h2>{{ title }}</h2>
-
-<ul>
-    {% for post in posts %}
-
-    <li>{{ post.title }} {{ post.category }} </li>
-
-    {% endfor %}
-</ul>
-
-<h2>All posts</h2>
-<ul>
-    {% for post in posts %}
-    <li> {{ post }}</li>
-    {% endfor %}
-</ul>
+<div class="container">
+	<div class="content-top">
+		<div class="content">
+			<div class="col-md-3 lente">
+				<h4>Categories</h4>
+				<ul>
+					{% for post in posts %}
+						<li><a href="{{ post.category.slug }}"><span> </span>{{ cat }}</a></li>
+					{% endfor %}
+				</ul>
+					<div class="sti">
+						<h4>Tegs</h4>
+						<img src="images/img1.jpg" class="img-responsive" alt="" />
+						{% for post in posts %}
+							<li><a href=""><span> </span>{{ post.teg }}</a></li>
+						{% endfor %}
+						<a href="#" class="link">Read More</a>
+					</div>
+			</div>
+			<div class="col-md-8 sedtell">
+				<h3><a href="#">My last note</a></h3>
+				<h5> *********************************** </h5>
+				<div class="sedtell-top">
+					{% for post in posts %}
+					<div class="sedtell-left">
+						{% if post.image  %}
+<!--						<p><img src="/media/images/2022/05/09/a1.jpg"></p>-->
+						<p><img src= "{{ post.image.url }}" class="img-responsive" alt=""/></p>
+						{% else %}
+						<p> "#" </p>
+						{% endif %}
+					</div>
+					<div class="sedtell-right">
+						<p> {{ post }} </p>
+						<a href="#" class="link">Read More</a>
+					</div>
+					<div class="clearfix"> </div>
+					{% endfor %}
+				</div>
+				<div class="sedtell-bottom">
+					<div class="sedtell-left1">
+						<div class="left-top">
+							<div class="top1">
+								<i class="umber"></i>
+							</div>
+							<div class="top2">
+								<h3><a href="#">Ornaeget mole</a></h3>
+								<h5>Rattortor odio vel aliq nul </h5>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<img src="images/img3.jpg" class="img-responsive" alt="" />
+						<p>Rices lacinia. Curabitur a arcu ut metus tristique rutrum sit amet non urna. Donec iaculis pretium diam eu aliquam.  </p>
+						<p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus</p>
+						<a href="#" class="link">Read More</a>
+					</div>
+					<div class="sedtell-right1">
+						<div class="left-top">
+							<div class="top1">
+								<i class="bell"></i>
+							</div>
+							<div class="top2">
+								<h3><a href="#">Ranare eget</a></h3>
+								<h5>Rattortor odio vel aliq </h5>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<img src="images/img4.jpg" class="img-responsive" alt="" />
+						<p>Rices lacinia. Curabitur a arcu ut metus tristique rutrum sit amet non urna. Donec iaculis pretium diam eu aliquam.  </p>
+						<p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus</p>
+						<a href="#" class="link">Read More</a>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+				<div class="clearfix"> </div>
+		</div>
+		</div>
+	</div>
 
 {% endblock content %}
 

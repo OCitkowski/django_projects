@@ -37,6 +37,9 @@
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="82199c80-fa6c-4184-8c76-75ebfba03596" />
   </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="82199c80-fa6c-4184-8c76-75ebfba03596" dataset="main.blog_category" active-filter-id="EMPTY_FILTER" />
+  </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
   </component>

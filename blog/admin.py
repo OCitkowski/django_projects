@@ -4,7 +4,8 @@ from .models import Teg, Post, Category, Comment
 
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
-    list_display = ('id', 'title', 'date_added', 'date_added', 'date_update', 'is_published')
+    list_display = ('id', 'title', 'date_added', 'date_added', 'date_update', 'is_published', 'text', 'image')
+    list_editable = ('title', 'is_published', 'text', 'image')
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'owner')

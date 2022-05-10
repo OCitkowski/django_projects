@@ -1,10 +1,9 @@
 from django.urls import path
-from .views import PostsListAll, PostsListCategory
+from .views import PostList, ShowPost
 
 app_name = 'blog'
 urlpatterns = [
     # ex: /topics
-    path('', PostsListAll.as_view(), name='main page'),
-    path('category/<slug:category_slug>/', PostsListCategory.as_view(), name='categories'),
-
+    path('', PostList.as_view(), name='main_page'),
+    path('/<slug:category_slug>/', ShowPost.as_view(), name='categories_page'),
 ]
