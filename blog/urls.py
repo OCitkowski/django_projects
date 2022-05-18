@@ -1,9 +1,15 @@
 from django.urls import path
-from .views import PostList, ShowPost
+from .views import PostListView, DetailView, HomeTemplateView
 
-app_name = 'blog'
+app_name = 'blog_urls'
 urlpatterns = [
-    # ex: /topics
-    path('', PostList.as_view(), name='main_page'),
-    path('/<slug:category_slug>/', ShowPost.as_view(), name='categories_page'),
+    # ex: /blog
+    path('', HomeTemplateView.as_view(), name='home'),
+    path('', HomeTemplateView.as_view(), name='about'),
+    path('', HomeTemplateView.as_view(), name='contact'),
+
+    path('blogs/', PostListView.as_view(), name='blogs'),
+    path('blog/<slug:category_slug>/', DetailView.as_view(), name='categories_page'),
+
 ]
+
