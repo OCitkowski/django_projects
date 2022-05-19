@@ -9,8 +9,24 @@ from .utils import menu
 #     response = redirect('blogs/')
 #     return response
 
+class AboutTemplateView(TemplateView):
+    template_name = "blog/about.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menu'] = menu
+        return context
+
 class HomeTemplateView(TemplateView):
     template_name = "blog/base.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menu'] = menu
+        return context
+
+class ContactTemplateView(TemplateView):
+    template_name = "blog/contact.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

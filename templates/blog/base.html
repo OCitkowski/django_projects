@@ -29,13 +29,15 @@
 
   <div class="nav-scroller py-1 mb-2">
     <nav class="nav d-flex justify-content-between">
-{% block title%}
-	<title> Blog 3 </title>
-{% endblock title %}
+    {% block title%}
+        <title> Blog 3 </title>
+    {% endblock title %}
+
       {% block menu %}
-      {% for m in menu %}
-      <a class="p-2 link-secondary" href="{% url 'blog_urls:blogs' %}"> {{ m.title }} </a>
-      {% endfor %}
+        <a class="p-2 link-secondary" href="{% url 'blog_urls:home' %}"> Home </a>
+        <a class="p-2 link-secondary" href="{% url 'blog_urls:blogs' %}"> Blog </a>
+        <a class="p-2 link-secondary" href="{% url 'blog_urls:about' %}"> About </a>
+        <a class="p-2 link-secondary" href="{% url 'blog_urls:contact' %}"> Contact </a>
       {% endblock menu %}
     </nav>
   </div>

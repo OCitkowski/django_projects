@@ -2,14 +2,9 @@
 {% load static %}
 
 {% block title%}
-	<title> Blog 3 </title>
+	<title> Blog </title>
 {% endblock title %}
 
-{% block menu %}
-	{% for m in menu %}
-		<a class="p-2 link-secondary" href="{% url 'blog_urls:about' %}" >{{ m.title }} </a>
-	{% endfor %}
-{% endblock menu %}
 
 {% block content %}
 <div class="container">
