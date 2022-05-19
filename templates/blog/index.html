@@ -7,50 +7,105 @@
 
 
 {% block content %}
-<div class="container">
-	<div class="content-top">
-		<div class="content">
-			<div class="col-md-3 lente">
-				<h4>Categories</h4>
-				<ul>
-					{% for cat in blog_cats %}
-						<li><a href="{{ cat.slug }}" > <span> </span> {{ cat }} </a></li>
-					{% endfor %}
-				</ul>
-					<div class="sti">
-						<h4>Tegs</h4>
-						<img src="images/img1.jpg" class="img-responsive" alt="" />
-						{% for teg in blog_tags %}
-							<li><a href=" teg.slug "><span> </span>{{ teg }}</a></li>
-						{% endfor %}
-						<a href="#" class="link">Read More</a>
-					</div>
-			</div>
-			<div class="col-md-8 sedtell">
+<main class="container">
 
-				<div class="sedtell-top">
-					{% for post in posts %}
-					<div class="sedtell-left">
-						{% if post.image  %}
-<!--						<p><img src="/media/images/2022/05/09/a1.jpg"></p>-->
-						<p><img src= "{{ post.image.url }}" class="img-responsive" alt=""/></p>
-						{% else %}
-						<p> "#" </p>
-						{% endif %}
-					</div>
-					<div class="sedtell-right">
-						<p> {{ post }} </p>
-						<a href="#" class="link">Read More</a>
-					</div>
-					<div class="clearfix"> </div>
-					{% endfor %}
-				</div>
+  <div class="row mb-2">
+    {% for post in first_posts %}
+    <div class="col-md-6">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">{{ post.title }}</strong>
+          <h3 class="mb-0">{{ post.title }}</h3>
+          <div class="mb-1 text-muted">{{ post.date_update }}</div>
+          <p class="card-text mb-auto">{{ post }}</p>
+          <a href="#" class="stretched-link">Continue reading</a>
+        </div>
 
-			</div>
-				<div class="clearfix"> </div>
-		</div>
-		</div>
-	</div>
+        <div class="col">
+             <img class="img-fluid" src="{% static 'blog/images/img1.jpg' %}" alt="New York" >
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    {% endfor %}
+
+  </div>
+
+  <div class="row g-5">
+
+    <div class="col-md-2">
+      <div class="position-sticky" style="top: 2rem;">
+
+        <div class="p-4">
+          <h4 class="fst-italic">Categories</h4>
+          <ol class="list-unstyled mb-0">
+
+            {% for cat in blog_cats %}
+            <li><a href="{% url 'blog_urls:categories_page' cat.slug %}"> {{ cat }} </a></li>
+            {% empty %}
+            <li>Sorry, no post in this list.</li>
+            {% endfor %}
+          </ol>
+        </div>
+
+        <div class="p-4">
+          <h4 class="fst-italic">Archives</h4>
+          <ol class="list-unstyled mb-0">
+            <li><a href="#">March 2021</a></li>
+            <li><a href="#">February 2021</a></li>
+            <li><a href="#">January 2021</a></li>
+            <li><a href="#">December 2020</a></li>
+            <li><a href="#">November 2020</a></li>
+            <li><a href="#">October 2020</a></li>
+            <li><a href="#">September 2020</a></li>
+            <li><a href="#">August 2020</a></li>
+            <li><a href="#">July 2020</a></li>
+            <li><a href="#">June 2020</a></li>
+            <li><a href="#">May 2020</a></li>
+            <li><a href="#">April 2020</a></li>
+          </ol>
+        </div>
+
+        <div class="p-4">
+          <h4 class="fst-italic">Elsewhere</h4>
+          <ol class="list-unstyled">
+            <li><a href="#">GitHub</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Facebook</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-10">
+
+      {% for post in posts %}
+      <article class="blog-post">
+        <h2 class="blog-post-title">{{ post.title }}</h2>
+        <p class="blog-post-meta">{{ post.date_update }}<a href="#">{{ post.owner }}</a></p>
+        <blockquote class="blockquote">
+          <p> {{ post }}</p>
+        </blockquote>
+        <p class="blog-footer">
+
+          {{ post.teg }}
+        </p>
+
+      </article>
+      {% empty %}
+      <li>Sorry, no post in this list.</li>
+      {% endfor %}
+
+      <nav class="blog-pagination" aria-label="Pagination">
+        <a class="btn btn-outline-primary" href="#">Older</a>
+        <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
+      </nav>
+
+    </div>
+
+  </div>
+
+</main>
 
 {% endblock content %}
 
