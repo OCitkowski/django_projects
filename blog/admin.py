@@ -33,7 +33,7 @@ class PostChangeList(ChangeList):
             model_admin, sortable_by, search_help_text,)
 
         self.prepopulated_fields = {'slug': ('title',)}
-        self.list_display = ['id','action_checkbox', 'title', 'category', 'tag', 'get_products', 'status',
+        self.list_display = ['id','action_checkbox', 'title', 'category', 'tag', 'get_tegs', 'status',
                             'text', 'image', 'date_added', 'date_update', 'owner', ]
         self.list_editable = ['text', 'image', 'category', 'status', 'owner', 'tag']
         self.list_display_links = ['title']

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title%}
-	<title> Blog </title>
+<title> {{ title }} </title>
 {% endblock title %}
 
 
@@ -10,20 +10,24 @@
 <main class="container">
 
   <div class="row mb-2">
-    {% for post in first_posts %}
+    {% for post_f in first_posts %}
+
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">{{ post.title }}</strong>
-          <h3 class="mb-0">{{ post.title }}</h3>
-          <div class="mb-1 text-muted">{{ post.date_update }}</div>
-          <p class="card-text mb-auto">{{ post }}</p>
-          <a href="#" class="stretched-link">Continue reading</a>
+          <h3 class="blog-post-title">{{ post_f.title }}</h3>
+          <div class="mb-1 text-muted">{{ post_f.date_update }}</div>
+          <p class="card-text mb-auto">{{ post_f }}</p>
+          <a href="{% url 'blog_urls:post_page' post_f.slug %}" class="stretched-link"> </a>
         </div>
 
         <div class="col">
-             <img class="img-fluid" src="{% static 'blog/images/img1.jpg' %}" alt="New York" >
+          {% if post_f.image %}
+            <img class="img-fluid" src="{{ post_f.image.url }}" alt={{ post_f.title }}>
+          {% endif %}
         </div>
+
       </div>
     </div>
     {% empty %}
@@ -48,32 +52,7 @@
           </ol>
         </div>
 
-        <div class="p-4">
-          <h4 class="fst-italic">Archives</h4>
-          <ol class="list-unstyled mb-0">
-            <li><a href="#">March 2021</a></li>
-            <li><a href="#">February 2021</a></li>
-            <li><a href="#">January 2021</a></li>
-            <li><a href="#">December 2020</a></li>
-            <li><a href="#">November 2020</a></li>
-            <li><a href="#">October 2020</a></li>
-            <li><a href="#">September 2020</a></li>
-            <li><a href="#">August 2020</a></li>
-            <li><a href="#">July 2020</a></li>
-            <li><a href="#">June 2020</a></li>
-            <li><a href="#">May 2020</a></li>
-            <li><a href="#">April 2020</a></li>
-          </ol>
-        </div>
 
-        <div class="p-4">
-          <h4 class="fst-italic">Elsewhere</h4>
-          <ol class="list-unstyled">
-            <li><a href="#">GitHub</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Facebook</a></li>
-          </ol>
-        </div>
       </div>
     </div>
 
@@ -81,14 +60,15 @@
 
       {% for post in posts %}
       <article class="blog-post">
-        <h2 class="blog-post-title">{{ post.title }}</h2>
+        <h2 class="blog-post-title"><a href="{% url 'blog_urls:post_page' post.slug %}"> {{ post.title }} </a></h2>
         <p class="blog-post-meta">{{ post.date_update }}<a href="#">{{ post.owner }}</a></p>
         <blockquote class="blockquote">
           <p> {{ post }}</p>
         </blockquote>
-        <p class="blog-footer">
-
-          {{ post.teg }}
+        <p class="blog-post-meta">
+          {% for tag in post.tag.all %}
+          <a href="#"> #{{ tag }} </a> <a> / </a>
+          {% endfor %}
         </p>
 
       </article>
@@ -96,10 +76,24 @@
       <li>Sorry, no post in this list.</li>
       {% endfor %}
 
-      <nav class="blog-pagination" aria-label="Pagination">
-        <a class="btn btn-outline-primary" href="#">Older</a>
-        <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
-      </nav>
+      <div class="blog-pagination" aria-label="Pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-primary" href="?page=1">&laquo; first</a>
+            <a class="btn btn-outline-primary" href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-primary" href="?page={{ page_obj.next_page_number }}">next</a>
+            <a class="btn btn-outline-secondary enabled" href="?page={{ page_obj.paginator.num_pages }}"
+               aria-disabled="false">last &raquo;</a>
+        {% endif %}
+    </span>
+      </div>
 
     </div>
 

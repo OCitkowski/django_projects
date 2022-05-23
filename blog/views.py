@@ -1,3 +1,5 @@
+import datetime
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Tag, Post, Category
@@ -39,18 +41,20 @@ class PostListView(ListView):
     model = Post
     template_name = 'blog/index.html'
     context_object_name = 'posts'
+    paginate_by = 3
     # extra_context = {'title': 'main page'}
 
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+
         context['title'] = 'Blogs page'
         context['blog_cats'] = Category.objects.all()
         context['blog_tags'] = Tag.objects.all()
         context['menu'] = menu
         first_posts = Post.objects.filter(status='p').order_by('-date_update')[:2]
         context['first_posts'] = first_posts
-
+        context['months_of_year'] = set(post.date_added.strftime("%B %Y") for post in self.get_queryset())
 
         return context
 
@@ -63,6 +67,7 @@ class PostCategoryListView(ListView):
     template_name = 'blog/index.html'
     context_object_name = 'posts'
     slug_url_kwarg = 'category_slug'
+    paginate_by = 3
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -74,16 +79,19 @@ class PostCategoryListView(ListView):
         first_posts = Post.objects.filter(status='p').order_by('-date_update')[:0]
         context['first_posts'] = first_posts
 
-        category_id = Category.objects.get(slug=self.kwargs['category_slug']).id
-        posts = Post.objects.filter(status='p', category=category_id).order_by('-date_added')
-        context['posts'] = posts
-
         return context
+
+
+    def get_queryset(self):
+        category_id = Category.objects.get(slug=self.kwargs['category_slug']).id
+        queryset = Post.objects.filter(status='p', category=category_id).order_by('-date_added')
+
+        return queryset
 
 
 class PostDetailView(DetailView):
     model = Post
-    template_name = 'blog/404.html'
+    template_name = 'blog/post.html'
     slug_url_kwarg = 'post_slug'
     context_object_name = 'post'
 
@@ -93,6 +101,7 @@ class PostDetailView(DetailView):
         context['title'] = 'Main page'
         context['categories'] = Category.objects.all()
         context['menu'] = menu
+
         return context
 
 

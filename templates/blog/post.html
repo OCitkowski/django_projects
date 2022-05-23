@@ -1,0 +1,78 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block title%}
+	<title> {{ title }} </title>
+{% endblock title %}
+
+
+{% block content %}
+<main class="container">
+
+  <div class="row mb-2">
+    {% for post in first_posts %}
+    <div class="col-md-6">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">{{ post.title }}</strong>
+          <h3 class="mb-0">{{ post.title }}</h3>
+          <div class="mb-1 text-muted">{{ post.date_update }}</div>
+          <p class="card-text mb-auto">{{ post }}</p>
+          <a href="#" class="stretched-link">Continue reading</a>
+        </div>
+
+        <div class="col">
+             <img class="img-fluid" src="{% static 'blog/images/img1.jpg' %}" alt="New York" >
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    {% endfor %}
+
+  </div>
+
+  <div class="row g-5">
+
+    <div class="col-md-12">
+
+
+      <article class="blog-post">
+        <h2 class="blog-post-title">{{ post.title }}</h2>
+        <p class="blog-post-meta">{{ post.date_update }}<a href="#">{{ post.owner }}</a></p>
+
+
+
+        <blockquote class="blockquote">
+          <div class="col">
+          {% if post.image %}
+            <img class="img-fluid" src="{{ post.image.url }}" alt={{ post.title }}>
+          {% endif %}
+        </div>
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">{{ post.title }}</strong>
+          <h3 class="mb-0">{{ post.title }}</h3>
+          <div class="mb-1 text-muted">{{ post.date_update }}</div>
+          <p class="card-text mb-auto">{{ post.text }}</p>
+        </div>
+        </blockquote>
+
+        <p class="blog-post-meta">
+          {% for tag in post.tag.all %}
+          <a href="#"> #{{ tag }} </a> <a> / </a>
+          {% endfor %}
+        </p>
+
+      </article>
+
+
+    </div>
+
+  </div>
+
+</main>
+
+{% endblock content %}
+
+
+
+
