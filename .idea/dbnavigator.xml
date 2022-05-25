@@ -39,6 +39,12 @@
     <connection id="82199c80-fa6c-4184-8c76-75ebfba03596" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="82199c80-fa6c-4184-8c76-75ebfba03596" dataset="main.blog_tag" active-filter-id="27a781d9-c7d2-46cc-ab54-4e9a77b07b63">
+      <filter id="27a781d9-c7d2-46cc-ab54-4e9a77b07b63" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
+    <filter-actions connection-id="82199c80-fa6c-4184-8c76-75ebfba03596" dataset="main.blog_post_tag" active-filter-id="49e1ce9a-33e9-4ad7-8e13-d487d7ddd51d">
+      <filter id="49e1ce9a-33e9-4ad7-8e13-d487d7ddd51d" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
     <filter-actions connection-id="82199c80-fa6c-4184-8c76-75ebfba03596" dataset="main.blog_category" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">

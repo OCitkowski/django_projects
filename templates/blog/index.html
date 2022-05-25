@@ -67,7 +67,7 @@
         </blockquote>
         <p class="blog-post-meta">
           {% for tag in post.tag.all %}
-          <a href="#"> #{{ tag }} </a> <a> / </a>
+          <a href="{% url 'blog_urls:tag_page' tag.slug %}"> #{{ tag }} </a> <a> / </a>
           {% endfor %}
         </p>
 

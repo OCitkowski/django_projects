@@ -13,7 +13,7 @@ class Category(models.Model):
     """atribute for Note"""
     title = models.CharField(max_length=80)
     date_added = models.DateTimeField(auto_now_add=True)
-    slug = models.SlugField(max_length=50, unique=True, db_index=True, verbose_name="URL")
+    slug = models.SlugField(max_length=90, unique=True, db_index=True, verbose_name="URL")
     owner = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
@@ -30,6 +30,7 @@ class Category(models.Model):
 class Tag(models.Model):
     """teg for Note"""
     title = models.CharField(max_length=80)
+    slug = models.SlugField(max_length=90, unique=True, db_index=True, verbose_name="URL")
 
     class Meta:
         verbose_name = 'Tag'
@@ -38,6 +39,9 @@ class Tag(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('tags_page', kwargs={'tag_slug': self.slug})
+
 
 class Post(models.Model):
     """ information for theme"""
@@ -45,7 +49,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     text = models.TextField()
     tag = models.ManyToManyField(Tag)
-    slug = models.SlugField(db_index=True, verbose_name="URL", max_length=50, unique=True, )
+    slug = models.SlugField(db_index=True, verbose_name="URL", max_length=200, unique=True, )
     image = models.ImageField(verbose_name='Image', upload_to='images/%Y/%m/%d', blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
     date_update = models.DateTimeField(auto_now=True)

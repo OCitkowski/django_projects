@@ -43,6 +43,7 @@ class PostChangeList(ChangeList):
 
 class PostAdmin(admin.ModelAdmin):
     actions = [make_published, make_draft, make_withdrawn]
+    prepopulated_fields = {"slug": ("title",)}
 
     def get_changelist(self, request, **kwargs):
         return PostChangeList
@@ -73,8 +74,14 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ('title',)
     prepopulated_fields = {"slug": ("title",)}
 
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title')
+    list_display_links = ('id', 'title')
+    search_fields = ('title',)
+    prepopulated_fields = {"slug": ("title",)}
 
-admin.site.register(Tag)
+
+admin.site.register(Tag, TagAdmin)
 admin.site.register(Comment)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category, CategoryAdmin)

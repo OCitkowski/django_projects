@@ -89,6 +89,33 @@ class PostCategoryListView(ListView):
         return queryset
 
 
+class PostTagListView(ListView):
+    model = Post
+    template_name = 'blog/index.html'
+    context_object_name = 'posts'
+    slug_url_kwarg = 'tag_slug'
+    paginate_by = 3
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Blogs page'
+        context['blog_cats'] = Category.objects.all()
+        context['blog_tags'] = Tag.objects.all()
+        context['menu'] = menu
+
+        first_posts = Post.objects.filter(status='p').order_by('-date_update')[:0]
+        context['first_posts'] = first_posts
+
+        return context
+
+
+    def get_queryset(self):
+        tag_id = Tag.objects.get(slug=self.kwargs['tag_slug']).id
+        queryset = Post.objects.filter(status='p', tag=tag_id).order_by('-date_added')
+
+        return queryset
+
+
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post.html'
