@@ -1,13 +1,23 @@
 {% extends "blog/base.html" %}
 {% load static %}
 
-{% block title%}
-	<title> contact </title>
+{% block title %}
+	<title> {{ title }} </title>
 {% endblock title %}
-
 
 {% block content %}
 <p> Contact </p>
+<p> {{ title }} </p>
+
+
+
+            {% for cat in blog_cats %}
+            <li><a href="{% url 'blog_urls:categories_page' cat.slug %}"> {{ cat }} </a></li>
+            {% empty %}
+            <li>Sorry, no post in this list.</li>
+            {% endfor %}
+
+
 {% endblock content %}
 
 

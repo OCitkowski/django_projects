@@ -1,6 +1,12 @@
 {% load static %}
 {% include 'blog/header.html' %}
 
+{% block title %}
+	<title> {{ title }} </title>
+{% endblock title %}
+
+</head>
+
 <body>
 
 <div class="container" >
@@ -32,9 +38,7 @@
 
   <div class="nav-scroller py-1 mb-2">
     <nav class="nav d-flex justify-content-between">
-    {% block title%}
-        <title> Blog 3 </title>
-    {% endblock title %}
+
 
       {% block menu %}
         <a class="p-2 link-secondary" href="{% url 'blog_urls:home' %}"> Home </a>

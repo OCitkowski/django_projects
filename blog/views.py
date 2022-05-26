@@ -5,35 +5,41 @@ from django.http import HttpResponse
 from .models import Tag, Post, Category
 from django.views.generic import ListView, DetailView, TemplateView
 # from .forms import TopicForm, EntryForm
-from .utils import menu
+from .utils import MixinTemplateView, menu
 
 # def redirect_view(request):
 #     response = redirect('blogs/')
 #     return response
 
-class AboutTemplateView(TemplateView):
+class AboutTemplateView(MixinTemplateView, TemplateView):
     template_name = "blog/about.html"
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['menu'] = menu
-        return context
 
-class HomeTemplateView(TemplateView):
+        context = super().get_context_data(**kwargs)
+        user_context = self.get_user_context(title = 'about', test = 'test')
+
+        return context | user_context
+
+class HomeTemplateView(MixinTemplateView, TemplateView):
     template_name = "blog/base.html"
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['menu'] = menu
-        return context
 
-class ContactTemplateView(TemplateView):
+        context = super().get_context_data(**kwargs)
+        user_context = self.get_user_context(title = 'home')
+
+        return context | user_context
+
+class ContactTemplateView(MixinTemplateView, TemplateView):
     template_name = "blog/contact.html"
 
     def get_context_data(self, **kwargs):
+
         context = super().get_context_data(**kwargs)
-        context['menu'] = menu
-        return context
+        user_context = self.get_user_context(title = 'contact')
+
+        return context | user_context
 
 
 class PostListView(ListView):

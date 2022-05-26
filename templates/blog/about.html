@@ -1,13 +1,26 @@
 {% extends "blog/base.html" %}
 {% load static %}
 
-{% block title%}
-	<title> about </title>
+{% block title %}
+	<title> {{ title }} </title>
 {% endblock title %}
-
 
 {% block content %}
 <p> About me </p>
+<p> {{ test }} </p>
+
+        <div class="p-4">
+          <h4 class="fst-italic">Categories</h4>
+          <ol class="list-unstyled mb-0">
+
+            {% for cat in blog_cats %}
+            <li><a href="{% url 'blog_urls:categories_page' cat.slug %}"> {{ cat }} </a></li>
+            {% empty %}
+            <li>Sorry, no post in this list.</li>
+            {% endfor %}
+          </ol>
+        </div>
+
 {% endblock content %}
 
 
