@@ -6,7 +6,10 @@ menu = [{'title': "Home", 'url_name': ''},
         {'title': "Contact", 'url_name': 'contact'},
 ]
 
-class MixinTemplateView():
+class MixinView():
+        model = Post
+        paginate_by = 3
+        context_object_name = 'posts'
 
         def get_user_context(self, **kwargs):
 

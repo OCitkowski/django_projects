@@ -1,13 +1,14 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
-# userList =User.objects.values()
+
 
 STATUS_CHOICES = [
     ('d', 'Draft'),
     ('p', 'Published'),
     ('w', 'Withdrawn'),
 ]
+
 
 class Category(models.Model):
     """atribute for Note"""
@@ -45,6 +46,7 @@ class Tag(models.Model):
 
 class Post(models.Model):
     """ information for theme"""
+    objects = None
     title = models.CharField(max_length=200, unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     text = models.TextField()
@@ -56,7 +58,6 @@ class Post(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
 
-
     class Meta:
         ordering = ['title', 'date_update']
         verbose_name = 'Post'
@@ -64,7 +65,6 @@ class Post(models.Model):
 
     def get_tegs(self):
         return "\n".join([p.title for p in self.tag.all()])
-
 
     def __str__(self):
         if len(self.text) >= 50:
@@ -94,7 +94,6 @@ class Comment(models.Model):
             return f"{self.text[:50]}"
 
 
-
 class Pub(models.Model):
     title = models.CharField(max_length=30)
 
@@ -103,7 +102,6 @@ class Pub(models.Model):
 
     def __str__(self):
         return self.title
-
 
 
 class Art(models.Model):
