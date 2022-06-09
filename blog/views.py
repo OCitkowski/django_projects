@@ -3,7 +3,6 @@ from django.views.generic import ListView, DetailView, TemplateView
 from .utils import MixinView
 
 
-
 class AboutView(MixinView, TemplateView):
     template_name = "blog/about.html"
 

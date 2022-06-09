@@ -30,6 +30,7 @@ class Category(models.Model):
 
 class Tag(models.Model):
     """teg for Note"""
+    objects = None
     title = models.CharField(max_length=80)
     slug = models.SlugField(max_length=90, unique=True, db_index=True, verbose_name="URL")
 

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     # my apps
     'blog.apps.BlogConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
