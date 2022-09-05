@@ -1,6 +1,7 @@
 from .models import Tag, Post, Category
 from django.views.generic import ListView, DetailView, TemplateView
 from .utils import MixinView
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
 class AboutView(MixinView, TemplateView):
@@ -33,8 +34,10 @@ class ContactView(MixinView, TemplateView):
         return context | user_context
 
 
-class PostListView(MixinView, ListView):
+class PostListView(PermissionRequiredMixin, MixinView, ListView):
     template_name = 'blog/index.html'
+
+    permission_required = ('blog.view_choice', 'blog.change_choice')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -46,9 +49,11 @@ class PostListView(MixinView, ListView):
         return Post.objects.filter(status='p')
 
 
-class PostCategoryListView(MixinView, ListView):
+class PostCategoryListView(PermissionRequiredMixin, MixinView, ListView):
     template_name = 'blog/index.html'
     slug_url_kwarg = 'category_slug'
+
+    permission_required = ('blog.view_choice', 'blog.change_choice')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -63,9 +68,11 @@ class PostCategoryListView(MixinView, ListView):
         return queryset
 
 
-class PostTagListView(MixinView, ListView):
+class PostTagListView(PermissionRequiredMixin, MixinView, ListView):
     template_name = 'blog/index.html'
     slug_url_kwarg = 'tag_slug'
+
+    permission_required = ('blog.view_choice', 'blog.change_choice')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -80,10 +87,12 @@ class PostTagListView(MixinView, ListView):
         return queryset
 
 
-class PostDetailView(MixinView, DetailView):
+class PostDetailView(PermissionRequiredMixin, MixinView, DetailView):
     template_name = 'blog/post.html'
     slug_url_kwarg = 'post_slug'
     context_object_name = 'post'
+
+    permission_required = ('blog.view_choice', 'blog.change_choice')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

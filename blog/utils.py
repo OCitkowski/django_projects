@@ -1,4 +1,7 @@
 from blog.models import Post, Tag, Category
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
 
 menu = [{'title': "Home", 'url_name': ''},
         {'title': "Blog", 'url_name': 'blogs'},
@@ -10,6 +13,8 @@ class MixinView():
         model = Post
         paginate_by = 3
         context_object_name = 'posts'
+
+
 
         def get_user_context(self, **kwargs):
 

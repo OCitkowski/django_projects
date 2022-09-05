@@ -33,10 +33,10 @@
         </a>
         {% if user.is_authenticated %}
         Hello, {{user.username}}
-        <a class="btn btn-sm btn-outline-secondary" href="{% url 'users:logout' %}">Log out</a>
+        <a class="btn btn-sm btn-outline-secondary" href="{% url 'users:logout' %}"> Log out </a>
         {% else %}
-        <a class="btn btn-sm btn-outline-secondary" href="{% url 'users:register' %}">Sign up</a>
-        <a class="btn btn-sm btn-outline-secondary" href="{% url 'users:login' %}">Log in</a>
+        <a class="btn btn-sm btn-outline-secondary" href="{% url 'users:register' %}"> Sign up </a>
+        <a class="btn btn-sm btn-outline-secondary" href="{% url 'users:login' %}"> Log in </a>
         {% endif %}
       </div>
     </div>
